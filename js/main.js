@@ -2,6 +2,8 @@ var request = new XMLHttpRequest();
 
 
 request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=2172797&APPID=d877a4ead94677246082ffd6ec22cb8a', true);
+request.open('GET', 'https://ghibliapi.herokuapp.com/films', true);
+
 request.onload = function () {
 
   // Begin accessing JSON data here
