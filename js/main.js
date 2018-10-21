@@ -59,12 +59,12 @@ function gotData(data) {
 function draw(){
   background(0);
 	if(weather){
-	var temp=weather.main.temp;
-	var humidity = weather.main.humidity;
+	var T=weather.main.temp;
+	var RH = weather.main.humidity;
   var p = weather.main.pressure;
-  ellipse(100,100, temp,temp);
-  ellipse(300,100, humidity,humidity);
-	s= temp + humidity +p;
+  ellipse(100,100, T,T);
+  ellipse(300,100, RH,RH);
+	s= T + RH +p;
 	console.log(s);
   var output = document.getElementById('density');
   output.innerHTML = s;
