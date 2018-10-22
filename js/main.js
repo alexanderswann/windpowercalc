@@ -49,7 +49,7 @@ function draw(){
   ellipse(300,100, RH,RH);
 
   var outputT = document.getElementById('T');
-  outputT.innerHTML = 'The temperature is ' +T+' °C'+' or '+ TF.toFixed(4) + ' °F' ;
+  outputT.innerHTML = 'The temperature is ' +T+' °C'+' or '+ TF.toFixed(2) + ' °F' ;
   var outputRH = document.getElementById('RH');
   outputRH.innerHTML = 'The humidity is ' +RH+'%';
   var outputp = document.getElementById('p');
