@@ -12,20 +12,20 @@
 // 	var T=weather.main.temp;
 // 	var RH = weather.main.humidity;
 //   var p = weather.main.pressure;
-// 	var Rd = 287.058;
-//   var Rv = 461.495;
-//   var a = 17.62;
-//   var b = 243.12;
-//   var md = 0.028964;
-//   var mv = 0.018016;
-//   var r = 8.314;
-//   var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
-//   var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
-//   var pv = p1 * (.01 * RH)
-//   var pd = p - pv;
-//   var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
-//   var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
-//   ρ = ρ.toFixed(4);
+	// var Rd = 287.058;
+  // var Rv = 461.495;
+  // var a = 17.62;
+  // var b = 243.12;
+  // var md = 0.028964;
+  // var mv = 0.018016;
+  // var r = 8.314;
+  // var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
+  // var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
+  // var pv = p1 * (.01 * RH)
+  // var pd = p - pv;
+  // var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
+  // var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
+  // ρ = ρ.toFixed(4);
 //   var output = document.getElementById('density');
 //   output.innerHTML = 'youngbratz';
 // 	}
@@ -35,7 +35,6 @@ var weather;
 var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
 var apiKey = '&APPID=d877a4ead94677246082ffd6ec22cb8a';
 var units = '&units=metric';
-var s;
 var input;
 function setup() {
   createCanvas (400,200);
@@ -62,11 +61,46 @@ function draw(){
 	var T=weather.main.temp;
 	var RH = weather.main.humidity;
   var p = weather.main.pressure;
+  var Rd = 287.058;
+  var Rv = 461.495;
+  var a = 17.62;
+  var b = 243.12;
+  var md = 0.028964;
+  var mv = 0.018016;
+  var r = 8.314;
+  var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
+  var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
+  var pv = p1 * (.01 * RH)
+  var pd = p - pv;
+  var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
+  var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
+  ρ = ρ.toFixed(4);
   ellipse(100,100, T,T);
   ellipse(300,100, RH,RH);
-	s= T + RH +p;
-	console.log(s);
-  var output = document.getElementById('density');
-  output.innerHTML = s;
+
+  var outputT = document.getElementById('T');
+  outputT.innerHTML = 'The temperature is' +T+' °C';
+  var outputRH = document.getElementById('RH');
+  outputRH.innerHTML = 'The humidity is' +RH+'%';
+  var outputp = document.getElementById('p');
+  outputp.innerHTML = 'The pressure is' +p+' hpa';
+
+  var outputTs = document.getElementById('Ts');
+  outputTs.innerHTML = 'The dewpoint is ' +Ts+' °C';
+
+  var outputp1 = document.getElementById('p1');
+  outputp1.innerHTML = 'The saturation vapor pressure is ' +p1+' hpa';
+
+  var outputpv = document.getElementById('pv');
+  outputpv.innerHTML = 'The water vapor pressure is ' +pv+' hpa';
+
+  var outputpd = document.getElementById('pd');
+  outputpd.innerHTML = 'The pressure of dry air is ' +pd+' hpa';
+
+  var outputρ = document.getElementById('ρ');
+  outputρ.innerHTML = 'The air density is ' +ρ+' kg/m³';
+
+  // var output = document.getElementById('');
+  // output.innerHTML = '' ++'';
 	}
 }
