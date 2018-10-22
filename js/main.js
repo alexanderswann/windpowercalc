@@ -26,6 +26,7 @@ function draw(){
   background(0);
 	if(weather){
 	var T=weather.main.temp;
+  var TF =(T * (9/5)) + 32;
 	var RH = weather.main.humidity;
   var p = weather.main.pressure;
   var w = weather.wind.speed;
@@ -38,6 +39,7 @@ function draw(){
   var mv = 0.018016;
   var r = 8.314;
   var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
+  var TsF=(Ts * (9/5)) + 32;
   var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
   var pv = p1 * (.01 * RH)
   var pd = p - pv;
@@ -47,7 +49,7 @@ function draw(){
   ellipse(300,100, RH,RH);
 
   var outputT = document.getElementById('T');
-  outputT.innerHTML = 'The temperature is ' +T+' °C';
+  outputT.innerHTML = 'The temperature is ' +T+' °C'+' or '+ TF.toFixed(4) + ' °F' ;
   var outputRH = document.getElementById('RH');
   outputRH.innerHTML = 'The humidity is ' +RH+'%';
   var outputp = document.getElementById('p');
@@ -59,7 +61,7 @@ function draw(){
   outputwd.innerHTML = 'The wind direction is ' +wd+'°';
 
   var outputTs = document.getElementById('Ts');
-  outputTs.innerHTML = 'The dewpoint is ' +Ts.toFixed(4)+' °C';
+  outputTs.innerHTML = 'The dewpoint is ' +Ts.toFixed(4)+' °C'+' or '+ TsF.toFixed(4) + ' °F';
 
   var outputp1 = document.getElementById('p1');
   outputp1.innerHTML = 'The saturation vapor pressure is ' +p1.toFixed(4)+' hpa';
