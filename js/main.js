@@ -1,8 +1,8 @@
-var weather;
 var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
 var apiKey = '&APPID=d877a4ead94677246082ffd6ec22cb8a';
 var units = '&units=metric';
 var input;
+var weather;
 function setup() {
   createCanvas (400,200);
 
@@ -25,8 +25,8 @@ function gotData(data) {
 function draw(){
   background(0);
 	if(weather){
-  	var T=weather.main.temp;
-    var TF =(T * (9/5)) + 32;
+  	var T = weather.main.temp;
+    var TF = (T * (9/5)) + 32;
   	var RH = weather.main.humidity;
     var p = weather.main.pressure;
     var w = weather.wind.speed;
@@ -39,7 +39,7 @@ function draw(){
     var mv = 0.018016;
     var r = 8.314;
     var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
-    var TsF=(Ts * (9/5)) + 32;
+    var TsF = (Ts * (9/5)) + 32;
     var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
     var pv = p1 * (.01 * RH)
     var pd = p - pv;
@@ -64,13 +64,10 @@ function draw(){
 
     var outputTs = document.getElementById('Ts');
     outputTs.innerHTML = 'The dewpoint is ' +Ts.toFixed(4)+' °C'+' or '+ TsF.toFixed(4) + ' °F';
-
     var outputp1 = document.getElementById('p1');
     outputp1.innerHTML = 'The saturation vapor pressure is ' +p1.toFixed(4)+' hpa';
-
     var outputpv = document.getElementById('pv');
     outputpv.innerHTML = 'The water vapor pressure is ' +pv.toFixed(4)+' hpa';
-
     var outputpd = document.getElementById('pd');
     outputpd.innerHTML = 'The pressure of dry air is ' +pd.toFixed(4)+' hpa';
 
