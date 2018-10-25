@@ -2,6 +2,8 @@ var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
 var apiKey = '&APPID=d877a4ead94677246082ffd6ec22cb8a';
 var units = '&units=metric';
 var input;
+var rad;
+var e;
 var weather;
 function setup() {
   createCanvas (400,200);
@@ -10,6 +12,8 @@ function setup() {
 	button.mousePressed(weatherAsk);
 
 	input = select('#city');
+  rad = select('#radius');
+  e = select('#efficiency');
 
 }
 
@@ -25,11 +29,15 @@ function gotData(data) {
 function draw(){
   background(0);
 	if(weather){
+    input = select('#city');
+    rad = select('#rad');
+    e = select('#e');
+    var ep = e.value()*100;
   	var T = weather.main.temp;
     var TF = (T * (9/5)) + 32;
   	var RH = weather.main.humidity;
     var p = weather.main.pressure;
-    var w = weather.wind.speed;
+    var ws = weather.wind.speed;
     var wd = weather.wind.deg;
     var Rd = 287.058;
     var Rv = 461.495;
@@ -46,6 +54,8 @@ function draw(){
     var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
     var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
 
+    var w = 0.5 * ρ * (Math.PI *((Math.pow(rad.value(),2)))) * (Math.pow(ws,3)) * e.value();
+
 
     ellipse(100,100, T,T);
     ellipse(300,100, RH,RH);
@@ -57,8 +67,8 @@ function draw(){
     var outputp = document.getElementById('p');
     outputp.innerHTML = 'The pressure is ' +p+' hpa';
 
-    var outputw = document.getElementById('w');
-    outputw.innerHTML = 'The wind speed is ' +w+' m/s';
+    var outputws = document.getElementById('ws');
+    outputws.innerHTML = 'The wind speed is ' +ws+' m/s';
     var outputwd = document.getElementById('wd');
     outputwd.innerHTML = 'The wind direction is ' +wd+'°';
 
@@ -73,5 +83,8 @@ function draw(){
 
     var outputρ = document.getElementById('ρ');
     outputρ.innerHTML = 'The air density is ' +ρ.toFixed(4)+' kg/m³';
+
+    var outputw = document.getElementById('w');
+    outputρ.innerHTML = 'The current power production for a wind turbine in '+ input.value() +' with a blade radius of ' +rad.value()+' meters and an efficiency of '+ep+'% is '+ w.toFixed(4) +' watts';
   	}
 }
