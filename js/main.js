@@ -83,8 +83,9 @@ function draw(){
 
     var outputρ = document.getElementById('ρ');
     outputρ.innerHTML = 'The air density is ' +ρ.toFixed(4)+' kg/m³';
+    var outputρ = document.getElementById('ρ');
 
     var outputw = document.getElementById('w');
-    outputρ.innerHTML = 'The current power production for a wind turbine in '+ input.value() +' with a blade radius of ' +rad.value()+' meters and an efficiency of '+ep+'% is '+ w.toFixed(4) +' watts';
+    outputw.innerHTML = 'The current power production for a wind turbine in '+ input.value() +' with a blade radius of ' +rad.value()+' meters and an efficiency of '+ep+'% is '+ w.toFixed(4) +' watts';
   	}
 }
