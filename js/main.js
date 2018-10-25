@@ -50,7 +50,7 @@ function calcs() {
 	var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
 	var TsF = (Ts * (9 / 5)) + 32;
 	var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
-	var pv = p1 * (.01 * RH)
+	var pv = p1 * (0.01 * RH)
 	var pd = p - pv;
 	var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
 	var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
@@ -69,11 +69,11 @@ function calcs() {
 	var outputws = document.getElementById('ws');
 	outputws.innerHTML = 'The wind speed is ' + ws + ' m/s';
 
-
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
 	outputw.innerHTML = 'The current power production for a wind turbine in ' + input.value() + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toFixed(4) + ' watts';
+
 
 	var outputwd = document.getElementById('wd');
 	outputwd.innerHTML = 'The wind direction is ' + wd + '°';
