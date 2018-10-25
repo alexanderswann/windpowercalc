@@ -58,7 +58,7 @@ function calcs() {
 	var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
 
 	ellipse(90, 100, T, T);
-	ellipse(270, 100, RH, RH);
+	ellipse(250, 100, RH, RH);
 
 	var outputT = document.getElementById('T');
 	outputT.innerHTML = 'The temperature is ' + T + ' °C' + ' or ' + TF.toFixed(2) + ' °F';
