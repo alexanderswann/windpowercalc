@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-  <head>
-    <title>Air Density Calculator</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="shortcut icon" href="WindTurbine.png" type="image/png">
-    <script src="js/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script> -->
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <meta charset="utf-8">
-  </head>
-
-  <body>
-    <p>
-  City: <input id = "city" value="Atlanta">
-  <br/>
-  Radius(m): <input id = "rad" value="7">
-  <br/>
-  Efficiency: <input id = "e" value=".3">(max possible is 59% according to Betz' law)
-  <br/>
-  <button id="submit">submit</button>
-
+   <head>
+      <title>Air Density Calculator</title>
+      <link rel="stylesheet" href="main.css">
+      <link rel="shortcut icon" href="WindTurbine.png" type="image/png">
+      <script src="js/main.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script> -->
+      <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+      <meta charset="utf-8">
+   </head>
+   <body>
+      City: <input id = "city" value="Atlanta">
+      <br/>
+      Radius(m): <input id = "rad" value="7">
+      <br/>
+      Efficiency: <input id = "e" value=".3">(max possible is 59% according to Betz' law)
+      <br/>
+      <button id="submit">submit</button>
       <ul class="color">
-
-        <li><div id="T"></div></li>
-        <li><div id="RH"></div></li>
-        <li><div id="p"></div></li>
-        <li><div id="ws"></div></li>
-
-
-
-        <li><div id="ρ"></div></li>
-
-        <li><div id="w"></div></li>
-        <li><a href="allCalculations.html">All Calculations</a></li>
+         <li>
+            <div id="T"></div>
+         </li>
+         <li>
+            <div id="RH"></div>
+         </li>
+         <li>
+            <div id="p"></div>
+         </li>
+         <li>
+            <div id="ws"></div>
+         </li>
+         <li>
+            <div id="ρ"></div>
+         </li>
+         <li>
+            <div id="w"></div>
+         </li>
+         <li><a href="allCalculations.html">All Calculations</a></li>
       </ul>
-
-      </p>
-  </body>
+   </body>
 </html>
