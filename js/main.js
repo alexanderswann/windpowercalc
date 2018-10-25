@@ -69,6 +69,15 @@ function draw(){
 
     var outputws = document.getElementById('ws');
     outputws.innerHTML = 'The wind speed is ' +ws+' m/s';
+
+
+    var outputρ = document.getElementById('ρ');
+    outputρ.innerHTML = 'The air density is ' +ρ.toFixed(4)+' kg/m³';
+
+    var outputw = document.getElementById('w');
+    outputw.innerHTML = 'The current power production for a wind turbine in '+ input.value() +' with a blade radius of ' +rad.value()+' meters and an efficiency of '+ep+'% is '+ w.toFixed(4) +' watts';
+
+
     var outputwd = document.getElementById('wd');
     outputwd.innerHTML = 'The wind direction is ' +wd+'°';
 
@@ -81,11 +90,5 @@ function draw(){
     var outputpd = document.getElementById('pd');
     outputpd.innerHTML = 'The pressure of dry air is ' +pd.toFixed(4)+' hpa';
 
-    var outputρ = document.getElementById('ρ');
-    outputρ.innerHTML = 'The air density is ' +ρ.toFixed(4)+' kg/m³';
-    var outputρ = document.getElementById('ρ');
-
-    var outputw = document.getElementById('w');
-    outputw.innerHTML = 'The current power production for a wind turbine in '+ input.value() +' with a blade radius of ' +rad.value()+' meters and an efficiency of '+ep+'% is '+ w.toFixed(4) +' watts';
   	}
 }
