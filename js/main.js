@@ -11,6 +11,19 @@ function setup() {
 	var button = select('#submit');
 	button.mousePressed(weatherAsk);
 
+  var buttonallcalc = select('#hidebutton');
+	buttonallcalc.mousePressed(allcalchide);
+
+  var outputhidebutton = document.getElementById('hidebutton');
+
+    if (outputhidebutton.style.display === "none") {
+     outputhidebutton.style.display = "block";
+   } else {
+     outputhidebutton.style.display = "none";
+   }
+
+
+
 	input = select('#city');
 	rad = select('#radius');
 	e = select('#efficiency');
@@ -25,6 +38,21 @@ function weatherAsk() {
 function gotData(data) {
 	weather = data;
 	calcs();
+}
+
+function allcalchide() {
+    var x = document.getElementsByClassName("hide");
+    var outputhidebutton = document.getElementById('hidebutton');
+    var i;
+      for (i = 0; i < x.length; i++) {
+           if (x[i].style.display === "none") {
+            x[i].style.display = "block";
+            outputhidebutton.innerHTML = 'Simplified View';
+        } else {
+            x[i].style.display = "none";
+            outputhidebutton.innerHTML = 'All Calculations';
+        }
+      }
 }
 
 function calcs() {
@@ -86,4 +114,7 @@ function calcs() {
 	outputpv.innerHTML = 'The water vapor pressure is ' + pv.toFixed(4) + ' hpa';
 	var outputpd = document.getElementById('pd');
 	outputpd.innerHTML = 'The pressure of dry air is ' + pd.toFixed(4) + ' hpa';
+
+  var outputhidebutton = document.getElementById('hidebutton');
+  outputhidebutton.style.display = "inline";
 }
