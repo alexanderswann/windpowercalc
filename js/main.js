@@ -13,30 +13,29 @@ function setup() {
 	var button = select('#submit');
 	button.mousePressed(weatherAsk);
 
-  var buttonallcalc = select('#hidebutton');
+	var buttonallcalc = select('#hidebutton');
 	buttonallcalc.mousePressed(allcalchide);
 
-  var outputhidebutton = document.getElementById('hidebutton');
+	var outputhidebutton = document.getElementById('hidebutton');
 
-    if (outputhidebutton.style.display === "none") {
-     outputhidebutton.style.display = "block";
-   } else {
-     outputhidebutton.style.display = "none";
-   }
+	if (outputhidebutton.style.display === "none") {
+		outputhidebutton.style.display = "block";
+	} else {
+		outputhidebutton.style.display = "none";
+	}
 
-   var x = document.getElementsByClassName("hide");
-   var outputhidebutton = document.getElementById('hidebutton');
-   var i;
-     for (i = 0; i < x.length; i++) {
-          if (x[i].style.display === "none") {
-           x[i].style.display = "block";
-           outputhidebutton.innerHTML = 'Simplified View';
-       } else {
-           x[i].style.display = "none";
-           outputhidebutton.innerHTML = 'All Calculations';
-       }
-     }
-
+	var x = document.getElementsByClassName("hide");
+	var outputhidebutton = document.getElementById('hidebutton');
+	var i;
+	for (i = 0; i < x.length; i++) {
+		if (x[i].style.display === "none") {
+			x[i].style.display = "block";
+			outputhidebutton.innerHTML = 'Simplified View';
+		} else {
+			x[i].style.display = "none";
+			outputhidebutton.innerHTML = 'All Calculations';
+		}
+	}
 
 
 	input = select('#city');
@@ -46,13 +45,13 @@ function setup() {
 }
 
 function weatherAsk() {
-      if(isNaN(input.value())){
-      type = '?q=';
-     }else{
-    	type = '?zip=';
-     }
+	if (isNaN(input.value())) {
+		type = '?q=';
+	} else {
+		type = '?zip=';
+	}
 
-	var url = api +type+ input.value() + apiKey + units;
+	var url = api + type + input.value() + apiKey + units;
 	loadJSON(url, gotData);
 }
 
@@ -62,22 +61,22 @@ function gotData(data) {
 }
 
 function allcalchide() {
-    var x = document.getElementsByClassName("hide");
-    var outputhidebutton = document.getElementById('hidebutton');
-    var i;
-      for (i = 0; i < x.length; i++) {
-           if (x[i].style.display === "none") {
-            x[i].style.display = "block";
-            outputhidebutton.innerHTML = 'Simplified View';
-        } else {
-            x[i].style.display = "none";
-            outputhidebutton.innerHTML = 'All Calculations';
-        }
-      }
+	var x = document.getElementsByClassName("hide");
+	var outputhidebutton = document.getElementById('hidebutton');
+	var i;
+	for (i = 0; i < x.length; i++) {
+		if (x[i].style.display === "none") {
+			x[i].style.display = "block";
+			outputhidebutton.innerHTML = 'Simplified View';
+		} else {
+			x[i].style.display = "none";
+			outputhidebutton.innerHTML = 'All Calculations';
+		}
+	}
 }
 
 function calcs() {
-  createCanvas(340, 200);
+	createCanvas(340, 200);
 	background(0);
 	input = select('#city');
 	rad = select('#rad');
@@ -89,7 +88,7 @@ function calcs() {
 	var p = weather.main.pressure;
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
-  var city = weather.name;
+	var city = weather.name;
 	var Rd = 287.058;
 	var Rv = 461.495;
 	var a = 17.62;
@@ -122,7 +121,9 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine in '+ city + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits:2}) + ' watts';
+	outputw.innerHTML = 'The current power production for a wind turbine in ' + city + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
+		maximumFractionDigits: 2
+	}) + ' watts';
 
 
 	var outputwd = document.getElementById('wd');
@@ -137,6 +138,6 @@ function calcs() {
 	var outputpd = document.getElementById('pd');
 	outputpd.innerHTML = 'The pressure of dry air is ' + pd.toFixed(4) + ' hpa';
 
-  var outputhidebutton = document.getElementById('hidebutton');
-  outputhidebutton.style.display = "inline";
+	var outputhidebutton = document.getElementById('hidebutton');
+	outputhidebutton.style.display = "inline";
 }
