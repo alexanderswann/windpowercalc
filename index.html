@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
    <head>
-      <title>Air Density Calculator</title>
+      <title>Wind Power Calculator</title>
       <link rel="stylesheet" href="main.css">
       <link rel="shortcut icon" href="WindTurbine.png" type="image/png">
       <script src="js/main.js"></script>
@@ -12,11 +12,11 @@
       <meta charset="utf-8">
    </head>
    <body>
-      City or Zipcode: <input id = "city" value="Atlanta">
+      City or Zipcode: <input id = "city" value="Atlanta"style="width: 105px">
       <br/>
-      Radius(m): <input id = "rad" value="57">
+      Radius(m): <input id = "rad" value="57" style="width: 40px">
       <br/>
-      Efficiency: <input id = "e" value=".3">(max possible is 59% according to Betz' law)
+      Efficiency: <input id = "e" value=".3" style="width: 40px">(max possible is 59% according to Betz' law)
       <br/>
       <button id="submit">Submit</button>
       <ul class="color">
@@ -53,7 +53,7 @@
         <li>
            <div id="w"></div>
         </li>
-         <li><button id="hidebutton">Simplified View</button></li>
+         <li><button id="hidebutton">All Calculations</button></li>
       </ul>
    </body>
 </html>

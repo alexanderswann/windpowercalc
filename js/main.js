@@ -24,6 +24,19 @@ function setup() {
      outputhidebutton.style.display = "none";
    }
 
+   var x = document.getElementsByClassName("hide");
+   var outputhidebutton = document.getElementById('hidebutton');
+   var i;
+     for (i = 0; i < x.length; i++) {
+          if (x[i].style.display === "none") {
+           x[i].style.display = "block";
+           outputhidebutton.innerHTML = 'Simplified View';
+       } else {
+           x[i].style.display = "none";
+           outputhidebutton.innerHTML = 'All Calculations';
+       }
+     }
+
 
 
 	input = select('#city');
@@ -35,10 +48,8 @@ function setup() {
 function weatherAsk() {
       if(isNaN(input.value())){
       type = '?q=';
-      zipcodeswitch= 'in ';
      }else{
     	type = '?zip=';
-      zipcodeswitch= 'in the zipcode ';
      }
 
 	var url = api +type+ input.value() + apiKey + units;
@@ -78,6 +89,7 @@ function calcs() {
 	var p = weather.main.pressure;
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
+  var city = weather.name;
 	var Rd = 287.058;
 	var Rv = 461.495;
 	var a = 17.62;
@@ -110,7 +122,7 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine ' +zipcodeswitch+ input.value() + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits:2}) + ' watts';
+	outputw.innerHTML = 'The current power production for a wind turbine in '+ city + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits:2}) + ' watts';
 
 
 	var outputwd = document.getElementById('wd');
