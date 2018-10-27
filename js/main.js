@@ -121,7 +121,7 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine in ' + city + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
+	outputw.innerHTML = 'The current power production for a wind turbine in ' + city +"<br />"+ ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
 		maximumFractionDigits: 2
 	}) + ' watts';
 

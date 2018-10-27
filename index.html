@@ -12,13 +12,34 @@
       <meta charset="utf-8">
    </head>
    <body>
-      <div class="container">
-         City or Zipcode: <input id = "city" value="Atlanta" style="width: 105px">
+      <div id="wrapper">
+         <header id="header">
+            <div class="inner">
+               <!-- <a href="index.html" class="logo">
+                  <span class="title">Team Connect</span>
+                  </a> -->
+            </div>
+         </header>
+         <div id="main">
+            <div class="inner">
+               <header>
+                  <h1>Welcome to the wind power calculator,<br />
+                     this calculator is currently being updated</a>.
+                  </h1>
+               </header>
+            </div>
+         </div>
+
+         <div class = "inputboxes">
+
+
+         City or Zipcode: <input class = "inputboxesstyle" id = "city" value="Atlanta" style="width: 105px">
          <br/>
-         Radius(m): <input id = "rad" value="57" style="width: 40px">
+         Radius(m): <input class = "inputboxesstyle" id = "rad" value="57" style="width: 40px">
          <br/>
-         Efficiency: <input id = "e" value=".3" style="width: 40px">(max possible is 59% according to Betz' law)
+         Efficiency: <input class = "inputboxesstyle" id = "e" value=".3" style="width: 40px">(max possible is 59% according to Betz' law)
          <br/>
+         </div>
          <button id="submit">Submit</button>
          <ul class="color">
             <li>
