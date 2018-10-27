@@ -1,10 +1,12 @@
-var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+var api = 'https://api.openweathermap.org/data/2.5/weather';
 var apiKey = '&APPID=d877a4ead94677246082ffd6ec22cb8a';
 var units = '&units=metric';
 var input;
+var type;
 var rad;
 var e;
 var weather;
+var zipcodeswitch;
 
 function setup() {
 
@@ -31,7 +33,15 @@ function setup() {
 }
 
 function weatherAsk() {
-	var url = api + input.value() + apiKey + units;
+      if(isNaN(input.value())){
+      type = '?q=';
+      zipcodeswitch= 'in ';
+     }else{
+    	type = '?zip=';
+      zipcodeswitch= 'in the zipcode ';
+     }
+
+	var url = api +type+ input.value() + apiKey + units;
 	loadJSON(url, gotData);
 }
 
@@ -100,7 +110,7 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine in ' + input.value() + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits:2}) + ' watts';
+	outputw.innerHTML = 'The current power production for a wind turbine ' +zipcodeswitch+ input.value() + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits:2}) + ' watts';
 
 
 	var outputwd = document.getElementById('wd');
