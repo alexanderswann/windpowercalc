@@ -7,7 +7,8 @@ var rad;
 var e;
 var weather;
 var zipcodeswitch;
-
+var lat;
+var lon;
 function setup() {
 
 	var button = select('#submit');
@@ -42,7 +43,32 @@ function setup() {
 	rad = select('#radius');
 	e = select('#efficiency');
 
+	var location = select('#location');
+	location.mousePressed(getLocation);
+
 }
+
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+    } else {
+        console.log('error');
+    }
+}
+function showPosition(position){
+	lat = position.coords.latitude;
+	lon = position.coords.longitude;
+	var long ='&lon=';
+	var lati = '?lat='
+	var url = api + lati + lat+ long+ lon+ apiKey + units;
+	loadJSON(url, gotData);
+	console.log(url);
+}
+
+
 
 function weatherAsk() {
 	if (isNaN(input.value())) {
@@ -88,7 +114,21 @@ function calcs() {
 	var p = weather.main.pressure;
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
+
+if (lat) {
+	if (lat.toFixed(2) == 33.85 && lon.toFixed(2) == (-84.42)) {
+		var city = 'Pace Academy';
+		var grammar = 'at ';
+	} else {
+		var city = weather.name;
+		var grammar = 'in ';
+	}
+} else {
 	var city = weather.name;
+	var grammar = 'in ';
+}
+
+
 	var Rd = 287.058;
 	var Rv = 461.495;
 	var a = 17.62;
@@ -121,7 +161,7 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine in ' + city +"<br />"+ ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
+	outputw.innerHTML = 'The current power production for a wind turbine '+ grammar  + city +"<br />"+ ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
 		maximumFractionDigits: 2
 	}) + ' watts';
 
@@ -140,4 +180,6 @@ function calcs() {
 
 	var outputhidebutton = document.getElementById('hidebutton');
 	outputhidebutton.style.display = "inline";
+	lat = 0;
+	lon = 0;
 }
