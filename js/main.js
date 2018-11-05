@@ -66,6 +66,8 @@ function showPosition(position){
 	var url = api + lati + lat+ long+ lon+ apiKey + units;
 	loadJSON(url, gotData);
 	console.log(url);
+	console.log(lat.toFixed(1));
+	console.log(lon.toFixed(1));
 }
 
 
@@ -116,7 +118,7 @@ function calcs() {
 	var wd = weather.wind.deg;
 
 if (lat) {
-	if (lat.toFixed(2) == 33.85 && lon.toFixed(2) == (-84.42)) {
+	if (lat.toFixed(1) == 33.9 || lat.toFixed(1) == 33.8 && lon.toFixed(1) == (-84.4)) {
 		var city = 'Pace Academy';
 		var grammar = 'at ';
 	} else {
