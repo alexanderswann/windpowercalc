@@ -20,12 +20,12 @@
 
 .inputboxes{
   padding: 6px 0px 7px 0px;
-
+border-radius: 19px;
 }
 
 .inputboxesstyle{
-  border: 0.4px solid black;
-border-radius: 6px;
+  border: 1px solid black;
+border-radius: 19px;
 color:black;
 padding: 6px 6px 7px 0px;
 margin: 0px 0px 7px 0px;
