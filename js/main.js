@@ -65,9 +65,6 @@ function showPosition(position){
 	var lati = '?lat='
 	var url = api + lati + lat+ long+ lon+ apiKey + units;
 	loadJSON(url, gotData);
-	console.log(url);
-	console.log(lat.toFixed(1));
-	console.log(lon.toFixed(1));
 }
 
 
@@ -104,8 +101,8 @@ function allcalchide() {
 }
 
 function calcs() {
-	createCanvas(340, 200);
-	background(0);
+	// createCanvas(340, 200);
+	// background(0);
 	input = select('#city');
 	rad = select('#rad');
 	e = select('#e');
@@ -118,7 +115,7 @@ function calcs() {
 	var wd = weather.wind.deg;
 
 if (lat) {
-	if (lat.toFixed(1) == 33.9 || lat.toFixed(1) == 33.8 && lon.toFixed(1) == (-84.4)) {
+	if ( lat<33.85 && lat>33.845 && lon.toFixed(1) == (-84.4)) {
 		var city = 'Pace Academy';
 		var grammar = 'at ';
 	} else {
@@ -148,8 +145,8 @@ if (lat) {
 
 	var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
 
-	ellipse(85, 100, T, T);
-	ellipse(255, 100, RH, RH);
+	// ellipse(85, 100, T, T);
+	// ellipse(255, 100, RH, RH);
 
 	var outputT = document.getElementById('T');
 	outputT.innerHTML = 'The temperature is ' + T + ' °C' + ' or ' + TF.toFixed(2) + ' °F';
