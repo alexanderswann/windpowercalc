@@ -145,8 +145,8 @@ if (lat) {
 
 	var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
 
-	// ellipse(85, 100, T, T);
-	// ellipse(255, 100, RH, RH);
+	ellipse(85, 100, T, T);
+	ellipse(255, 100, RH, RH);
 
 	var outputT = document.getElementById('T');
 	outputT.innerHTML = 'The temperature is ' + T + ' °C' + ' or ' + TF.toFixed(2) + ' °F';
@@ -179,6 +179,4 @@ if (lat) {
 
 	var outputhidebutton = document.getElementById('hidebutton');
 	outputhidebutton.style.display = "inline";
-	lat = 0;
-	lon = 0;
 }
