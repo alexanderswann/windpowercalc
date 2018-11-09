@@ -101,8 +101,8 @@ function allcalchide() {
 }
 
 function calcs() {
-	// createCanvas(340, 200);
-	// background(0);
+	createCanvas(340, 200);
+	background(0);
 	input = select('#city');
 	rad = select('#rad');
 	e = select('#e');
