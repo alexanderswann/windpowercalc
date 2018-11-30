@@ -1,11 +1,14 @@
-var api = 'https://api.openweathermap.org/data/2.5/weather';
+var api = 'https://api.openweathermap.org/data/2.5/';
 var apiKey = '&APPID=d877a4ead94677246082ffd6ec22cb8a';
 var units = '&units=metric';
+var curr = 'weather';
+var fore = 'forecast';
 var input;
 var type;
 var rad;
 var e;
 var weather;
+var foreweather;
 var zipcodeswitch;
 var lat;
 var lon;
@@ -63,8 +66,10 @@ function showPosition(position){
 	lon = position.coords.longitude;
 	var long ='&lon=';
 	var lati = '?lat='
-	var url = api + lati + lat+ long+ lon+ apiKey + units;
+	var url = api + curr + lati + lat+ long+ lon+ apiKey + units;
+	var foreurl = api + fore + lati + lat+ long+ lon+ apiKey + units;
 	loadJSON(url, gotData);
+	loadJSON(foreurl, gotforeData);
 }
 
 
@@ -76,14 +81,22 @@ function weatherAsk() {
 		type = '?zip=';
 	}
 
-	var url = api + type + input.value() + apiKey + units;
+	var url = api +curr+ type + input.value() + apiKey + units;
 	loadJSON(url, gotData);
+
+	var foreurl = api + fore+ type + input.value() + apiKey + units;
+	loadJSON(foreurl, gotforeData);
 }
 
 function gotData(data) {
 	weather = data;
 	calcs();
 }
+function gotforeData(foredata) {
+	foreweather = foredata;
+	calcs2();
+}
+
 
 function allcalchide() {
 	var x = document.getElementsByClassName("hide");
@@ -100,9 +113,44 @@ function allcalchide() {
 	}
 }
 
+function calcs2() {
+	// var fore2 = foreweather.list[5].dt
+	// console.log(foreweather.list[5].wind.speed,foreweather.list[0].wind.speed,foreweather.list.length);
+	var futurew= '';
+	for (var i = 0; i < foreweather.list.length; i++) {
+		// console.log(foreweather.list[i].wind.speed);
+		var T = foreweather.list[i].main.temp;
+		var TF = (T * (9 / 5)) + 32;
+		var RH = foreweather.list[i].main.humidity;
+		var p = foreweather.list[i].main.pressure;
+		var ws = foreweather.list[i].wind.speed;
+		var wd = foreweather.list[i].wind.deg;
+
+		var Rd = 287.058;
+		var Rv = 461.495;
+		var a = 17.62;
+		var b = 243.12;
+		var md = 0.028964;
+		var mv = 0.018016;
+		var r = 8.314;
+		var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
+		var TsF = (Ts * (9 / 5)) + 32;
+		var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
+		var pv = p1 * (0.01 * RH)
+		var pd = p - pv;
+		var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
+		var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
+
+		var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
+
+		console.log(w,"on",foreweather.list[i].dt_txt);
+		futurew = futurew+w+" "+foreweather.list[i].dt_txt +",";
+	}
+	console.log(futurew);
+}
+
 function calcs() {
-	createCanvas(340, 200);
-	background(0);
+
 	input = select('#city');
 	rad = select('#rad');
 	e = select('#e');
@@ -114,8 +162,9 @@ function calcs() {
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
 
+
 if (lat) {
-	if ( lat<33.85 && lat>33.845 && lon.toFixed(1) == (-84.4)) {
+	if ( lat<33.85 || lat>33.845 && lon.toFixed(1) == (-84.4)) {
 		var city = 'Pace Academy';
 		var grammar = 'at ';
 	} else {
@@ -144,7 +193,8 @@ if (lat) {
 	var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
 
 	var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
-
+	createCanvas(340, 200);
+	background(0);
 	ellipse(85, 100, T, T);
 	ellipse(255, 100, RH, RH);
 
