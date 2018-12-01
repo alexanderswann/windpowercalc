@@ -12,6 +12,7 @@ var foreweather;
 var zipcodeswitch;
 var lat;
 var lon;
+
 function setup() {
 
 	var button = select('#submit');
@@ -87,15 +88,15 @@ function weatherAsk() {
 	var foreurl = api + fore+ type + input.value() + apiKey + units;
 	loadJSON(foreurl, gotforeData);
 }
-
-function gotData(data) {
-	weather = data;
-	calcs();
-}
 function gotforeData(foredata) {
 	foreweather = foredata;
 	calcs2();
 }
+function gotData(data) {
+	weather = data;
+	calcs();
+}
+
 
 
 function allcalchide() {
@@ -113,41 +114,7 @@ function allcalchide() {
 	}
 }
 
-function calcs2() {
-	// var fore2 = foreweather.list[5].dt
-	// console.log(foreweather.list[5].wind.speed,foreweather.list[0].wind.speed,foreweather.list.length);
-	var futurew= '';
-	for (var i = 0; i < foreweather.list.length; i++) {
-		// console.log(foreweather.list[i].wind.speed);
-		var T = foreweather.list[i].main.temp;
-		var TF = (T * (9 / 5)) + 32;
-		var RH = foreweather.list[i].main.humidity;
-		var p = foreweather.list[i].main.pressure;
-		var ws = foreweather.list[i].wind.speed;
-		var wd = foreweather.list[i].wind.deg;
 
-		var Rd = 287.058;
-		var Rv = 461.495;
-		var a = 17.62;
-		var b = 243.12;
-		var md = 0.028964;
-		var mv = 0.018016;
-		var r = 8.314;
-		var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
-		var TsF = (Ts * (9 / 5)) + 32;
-		var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
-		var pv = p1 * (0.01 * RH)
-		var pd = p - pv;
-		var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
-		var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
-
-		var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
-
-		console.log(w,"on",foreweather.list[i].dt_txt);
-		futurew = futurew+w+" "+foreweather.list[i].dt_txt +",";
-	}
-	console.log(futurew);
-}
 
 function calcs() {
 
@@ -227,4 +194,55 @@ if (lat) {
 
 	var outputhidebutton = document.getElementById('hidebutton');
 	outputhidebutton.style.display = "inline";
+}
+
+function calcs2() {
+
+		var futurew= '{"data": [';
+
+	for (var i = 0; i < foreweather.list.length; i++) {
+		input = select('#city');
+		rad = select('#rad');
+		e = select('#e');
+		var ep = e.value() * 100;
+
+		var T = foreweather.list[i].main.temp;
+		var TF = (T * (9 / 5)) + 32;
+		var RH = foreweather.list[i].main.humidity;
+		var p = foreweather.list[i].main.pressure;
+		var ws = foreweather.list[i].wind.speed;
+		var wd = foreweather.list[i].wind.deg;
+
+		var Rd = 287.058;
+		var Rv = 461.495;
+		var a = 17.62;
+		var b = 243.12;
+		var md = 0.028964;
+		var mv = 0.018016;
+		var r = 8.314;
+		var Ts = (b * (Math.log(RH / 100) + a * T / (b + T))) / (a - (Math.log(RH / 100) + a * T / (b + T)));
+		var TsF = (Ts * (9 / 5)) + 32;
+		var p1 = (6.1078 * (Math.pow(10, ((7.5 * Ts) / (Ts + 237.3)))));
+		var pv = p1 * (0.01 * RH)
+		var pd = p - pv;
+		var pp = ((pd * 100) / (Rd * (T + 273.15))) + ((pv * 100) / (Rv * (T + 273.15)));
+		var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
+
+		var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
+		var date = foreweather.list[i].dt_txt;
+		// console.log(w,"on",date);
+		// console.log(foreweather.list.length, i);
+		// var fore2 = foreweather.list[5].dt
+		// console.log(foreweather.list[5].wind.speed,foreweather.list[0].wind.speed,foreweather.list.length);
+	// console.log(foreweather.list[i].wind.speed);
+
+		if (i == foreweather.list.length-1) {
+			futurew = futurew + '{ "power":' +w +','+ '"date":' +'"'+ date+'"'+' }]} ';
+			futurew = JSON.parse(futurew);
+		} else {
+			futurew = futurew + '{ "power":' +w +','+ '"date":' +'"'+ date+'"'+' }, ';
+		}
+	}
+
+	console.log(futurew.data[3].power,futurew.data[3].date);
 }
