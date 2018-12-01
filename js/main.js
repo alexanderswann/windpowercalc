@@ -259,7 +259,7 @@ function calcs2() {
 	// console.log(highp)
 
 	for (var i = 1; i < futurew.data.length; i++) {
-		rect((i)*(340-10)/futurew.data.length , 200-(futurew.data[i].power/highp*180), 8, futurew.data[i].power/highp*180);
+		rect((i)*(340-10)/futurew.data.length , 200-(futurew.data[i].power/highp*180), 6, futurew.data[i].power/highp*180);
 		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
 	}
 	var outputf = document.getElementById('f');
