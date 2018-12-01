@@ -131,7 +131,7 @@ function calcs() {
 
 
 if (lat) {
-	if ( lat<33.85 || lat>33.845 && lon.toFixed(1) == (-84.4)) {
+	if ( lat<33.85 && lat>33.845 && lon.toFixed(1) == (-84.4)) {
 		var city = 'Pace Academy';
 		var grammar = 'at ';
 	} else {
@@ -160,10 +160,7 @@ if (lat) {
 	var ρ = ((100 * pd * md) + (100 * pv * mv)) / ((T + 273.15) * r);
 
 	var w = 0.5 * ρ * (Math.PI * ((Math.pow(rad.value(), 2)))) * (Math.pow(ws, 3)) * e.value();
-	createCanvas(340, 200);
-	background(0);
-	ellipse(85, 100, T, T);
-	ellipse(255, 100, RH, RH);
+
 
 	var outputT = document.getElementById('T');
 	outputT.innerHTML = 'The temperature is ' + T + ' °C' + ' or ' + TF.toFixed(2) + ' °F';
@@ -244,5 +241,27 @@ function calcs2() {
 		}
 	}
 
-	console.log(futurew.data[3].power,futurew.data[3].date);
+	// console.log(futurew.data[4].power,futurew.data[4].date);
+	createCanvas(340, 200);
+	background(0);
+	// ellipse(85, 100, T, T);
+	// ellipse(255, 100, RH, RH);
+	fill('white');
+	// rect(255, 20, 6, 180);
+	var highp =0;
+	for (var i = 0; i < futurew.data.length; i++) {
+		if (futurew.data[i].power > highp) {
+			highp = futurew.data[i].power
+		}else {
+			highp=highp;
+		}
+	}
+	// console.log(highp)
+
+	for (var i = 1; i < futurew.data.length; i++) {
+		rect((i)*(340-10)/futurew.data.length , 200-(futurew.data[i].power/highp*180), 8, futurew.data[i].power/highp*180);
+		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
+	}
+	var outputf = document.getElementById('f');
+	outputf.innerHTML = 'The future projected power output for the next 5 days';
 }
