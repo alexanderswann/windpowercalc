@@ -9,6 +9,9 @@
 
 }
 
+#main{
+  font-size: 20px;
+}
 .color,  #submit, #hidebutton,.inputboxes, #location{
   list-style: none;
   font-size: 15px;
@@ -52,7 +55,7 @@ margin: 0px 0px 7px 0px;
 
 
 #defaultCanvas0{
-  padding: 0px 0px 0px 20px;
+  padding: 0px 0px 0px 10px;
 }
 
 /* .p5Canvas{
