@@ -263,5 +263,5 @@ function calcs2() {
 		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
 	}
 	var outputf = document.getElementById('f');
-	outputf.innerHTML = 'The future projected power output for the next 5 days';
+	outputf.innerHTML = 'The future projected power output for the next 5 days'+"<br />"+ "max="+highp.toFixed(2)+"watts";
 }
