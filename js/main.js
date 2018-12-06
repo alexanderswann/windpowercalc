@@ -256,18 +256,20 @@ function calcs2() {
 	for (var i = 0; i < futurew.data.length; i++) {
 		if (futurew.data[i].power > highp) {
 			highp = futurew.data[i].power
+			var highn = i;
 		} else {
 			highp = highp;
 		}
 	}
-	// console.log(highp)
+	// console.log(highp, highn);
+	// console.log(futurew.data[highn].date);
 
 	for (var i = 1; i < futurew.data.length; i++) {
 		rect((i) * (340 - 10) / futurew.data.length, 200 - (futurew.data[i].power / highp * 180), 6, futurew.data[i].power / highp * 180);
 		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
 	}
 	var outputf = document.getElementById('f');
-	outputf.innerHTML = 'The future projected power output for the next 5 days' + "<br />" + "max= " + highp.toLocaleString(undefined, {
+	outputf.innerHTML = 'The future projected power output for the next 5 days' + "<br />" + "the max power output for the next five days will be " + highp.toLocaleString(undefined, {
 		maximumFractionDigits: 2
-	}) + " watts";
+	}) + " watts " + "on " + futurew.data[highn].date;
 }
