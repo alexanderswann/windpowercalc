@@ -128,18 +128,19 @@ function calcs() {
 	var p = weather.main.pressure;
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
+	var city;
 
 
 if (lat) {
 	if ( lat<33.85 && lat>33.845 && lon.toFixed(1) == (-84.4)) {
-		var city = 'Pace Academy';
+		city = 'Pace Academy';
 		var grammar = 'at ';
 	} else {
-		var city = weather.name;
+		city = weather.name;
 		var grammar = 'in ';
 	}
 } else {
-	var city = weather.name;
+	city = weather.name;
 	var grammar = 'in ';
 }
 
