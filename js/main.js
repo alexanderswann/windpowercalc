@@ -53,25 +53,26 @@ function setup() {
 }
 
 
+
 function getLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
 
-	} else {
-		console.log('error');
-	}
+    } else {
+        console.log('error');
+    }
 }
-
-function showPosition(position) {
+function showPosition(position){
 	lat = position.coords.latitude;
 	lon = position.coords.longitude;
-	var long = '&lon=';
+	var long ='&lon=';
 	var lati = '?lat='
-	var url = api + curr + lati + lat + long + lon + apiKey + units;
-	var foreurl = api + fore + lati + lat + long + lon + apiKey + units;
+	var url = api + curr + lati + lat+ long+ lon+ apiKey + units;
+	var foreurl = api + fore + lati + lat+ long+ lon+ apiKey + units;
 	loadJSON(url, gotData);
 	loadJSON(foreurl, gotforeData);
 }
+
 
 
 function weatherAsk() {
@@ -81,22 +82,21 @@ function weatherAsk() {
 		type = '?zip=';
 	}
 
-	var url = api + curr + type + input.value() + apiKey + units;
+	var url = api +curr+ type + input.value() + apiKey + units;
 	loadJSON(url, gotData);
 
-	var foreurl = api + fore + type + input.value() + apiKey + units;
+	var foreurl = api + fore+ type + input.value() + apiKey + units;
 	loadJSON(foreurl, gotforeData);
 }
-
 function gotforeData(foredata) {
 	foreweather = foredata;
 	calcs2();
 }
-
 function gotData(data) {
 	weather = data;
 	calcs();
 }
+
 
 
 function allcalchide() {
@@ -115,6 +115,7 @@ function allcalchide() {
 }
 
 
+
 function calcs() {
 
 	input = select('#city');
@@ -127,21 +128,20 @@ function calcs() {
 	var p = weather.main.pressure;
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
-	var city;
 
 
-	if (lat) {
-		if (lat < 33.85 && lat > 33.845 && lon.toFixed(1) == (-84.4)) {
-			city = 'Pace Academy';
-			var grammar = 'at ';
-		} else {
-			city = weather.name;
-			var grammar = 'in ';
-		}
+if (lat) {
+	if ( lat<33.85 && lat>33.845 && lon.toFixed(1) == (-84.4)) {
+		var city = 'Pace Academy';
+		var grammar = 'at ';
 	} else {
-		city = weather.name;
+		var city = weather.name;
 		var grammar = 'in ';
 	}
+} else {
+	var city = weather.name;
+	var grammar = 'in ';
+}
 
 
 	var Rd = 287.058;
@@ -174,9 +174,7 @@ function calcs() {
 	var outputρ = document.getElementById('ρ');
 	outputρ.innerHTML = 'The air density is ' + ρ.toFixed(4) + ' kg/m³';
 	var outputw = document.getElementById('w');
-	outputw.innerHTML = 'The current power production for a wind turbine ' + grammar + city + "<br />" + ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {
-		maximumFractionDigits: 2
-	}) + ' watts';
+	outputw.innerHTML = 'The current power production for a wind turbine '+ grammar  + city +"<br />"+ ' with a blade radius of ' + rad.value() + ' meters and an efficiency of ' + ep + '% is ' + w.toLocaleString(undefined, {maximumFractionDigits: 2}) + ' watts';
 
 
 	var outputwd = document.getElementById('wd');
@@ -193,13 +191,11 @@ function calcs() {
 
 	var outputhidebutton = document.getElementById('hidebutton');
 	outputhidebutton.style.display = "inline";
-	lat = null;
-	lon = null;
 }
 
 function calcs2() {
 
-	var futurew = '{"data": [';
+		var futurew= '{"data": [';
 
 	for (var i = 0; i < foreweather.list.length; i++) {
 		input = select('#city');
@@ -235,13 +231,13 @@ function calcs2() {
 		// console.log(foreweather.list.length, i);
 		// var fore2 = foreweather.list[5].dt
 		// console.log(foreweather.list[5].wind.speed,foreweather.list[0].wind.speed,foreweather.list.length);
-		// console.log(foreweather.list[i].wind.speed);
+	// console.log(foreweather.list[i].wind.speed);
 
-		if (i == foreweather.list.length - 1) {
-			futurew = futurew + '{ "power":' + w + ',' + '"date":' + '"' + date + '"' + ' }]} ';
+		if (i == foreweather.list.length-1) {
+			futurew = futurew + '{ "power":' +w +','+ '"date":' +'"'+ date+'"'+' }]} ';
 			futurew = JSON.parse(futurew);
 		} else {
-			futurew = futurew + '{ "power":' + w + ',' + '"date":' + '"' + date + '"' + ' }, ';
+			futurew = futurew + '{ "power":' +w +','+ '"date":' +'"'+ date+'"'+' }, ';
 		}
 	}
 
@@ -252,24 +248,20 @@ function calcs2() {
 	// ellipse(255, 100, RH, RH);
 	fill('white');
 	// rect(255, 20, 6, 180);
-	var highp = 0;
+	var highp =0;
 	for (var i = 0; i < futurew.data.length; i++) {
 		if (futurew.data[i].power > highp) {
 			highp = futurew.data[i].power
-			var highn = i;
-		} else {
-			highp = highp;
+		}else {
+			highp=highp;
 		}
 	}
-	// console.log(highp, highn);
-	// console.log(futurew.data[highn].date);
+	// console.log(highp)
 
 	for (var i = 1; i < futurew.data.length; i++) {
-		rect((i) * (340 - 10) / futurew.data.length, 200 - (futurew.data[i].power / highp * 180), 6, futurew.data[i].power / highp * 180);
+		rect((i)*(340-10)/futurew.data.length , 200-(futurew.data[i].power/highp*180), 6, futurew.data[i].power/highp*180);
 		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
 	}
 	var outputf = document.getElementById('f');
-	outputf.innerHTML = 'The future projected power output for the next 5 days' + "<br />" + "the max power output for the next five days will be " + highp.toLocaleString(undefined, {
-		maximumFractionDigits: 2
-	}) + " watts " + "on " + futurew.data[highn].date;
+	outputf.innerHTML = 'The future projected power output for the next 5 days'+"<br />"+ "max="+highp.toLocaleString(undefined, {maximumFractionDigits: 2})+"watts";
 }
