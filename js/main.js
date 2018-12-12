@@ -131,7 +131,7 @@ function calcs() {
 
 
 	if (lat) {
-		if (lat.toFixed(2) == (33.85) && lon.toFixed(2) == (-84.41)) {
+		if (lat.toFixed(2) == (33.85)||lat.toFixed(3) == (33.845) && lon.toFixed(2) == (-84.41)) {
 			city = 'Pace Academy';
 			var grammar = 'at ';
 		} else {
