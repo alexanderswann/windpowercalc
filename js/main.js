@@ -269,7 +269,7 @@ function calcs2() {
 		// console.log(200-(futurew.data[i].power/highp*180) , i*340/futurew.data.length, 6, futurew.data[i].power/highp*180);
 	}
 	var outputf = document.getElementById('f');
-	outputf.innerHTML = 'The future projected power output for the next 5 days' + "<br />" + "the max power output for the next five days will be " + highp.toLocaleString(undefined, {
+	outputf.innerHTML = 'The future projected power output for the next 5 days' + "<br />" + "The max power output for the next five days will be " + highp.toLocaleString(undefined, {
 		maximumFractionDigits: 2
 	}) + " watts " + "on " + futurew.data[highn].date;
 }
