@@ -12,6 +12,8 @@ var foreweather;
 var zipcodeswitch;
 var lat;
 var lon;
+var power;
+var totalpowercostperkhw;
 
 function setup() {
 
@@ -90,14 +92,32 @@ function weatherAsk() {
 
 function gotforeData(foredata) {
 	foreweather = foredata;
-	calcs2();
 }
 
 function gotData(data) {
 	weather = data;
-	calcs();
+	powerCost();
 }
 
+function powerCost() {
+var powerapi = 'https://developer.nrel.gov/api/utility_rates/v3.json?api_key=frEBBNK8Bf2KfNe3V84AKeE0PNKsyPpPcWz2uxw8&';
+var plat = 'lat=';
+var plon ='&lon=';
+var nclat = weather.coord.lat;
+var nclon = weather.coord.lon;
+var purl = powerapi + plat + nclat + plon + nclon;
+loadJSON(purl, gotPowerData);
+}
+
+function gotPowerData(powerdata) {
+	power = powerdata;
+	calcs3();
+}
+function calcs3() {
+	totalpowercostperkhw = power.outputs.industrial;
+	calcs2();
+	calcs();
+}
 
 function allcalchide() {
 	var x = document.getElementsByClassName("hide");
@@ -130,6 +150,7 @@ function calcs() {
 	var city;
 
 
+
 	if (lat) {
 		if (lat.toFixed(2) == (33.85)||lat.toFixed(3) == (33.845) && lon.toFixed(2) == (-84.41)) {
 			city = 'Pace Academy';
@@ -141,7 +162,11 @@ function calcs() {
 	} else {
 		city = weather.name;
 		var grammar = 'in ';
+
 	}
+
+
+
 
 
 	var Rd = 287.058;
@@ -178,6 +203,9 @@ function calcs() {
 		maximumFractionDigits: 2
 	}) + ' watts';
 
+	var outputc = document.getElementById('c');
+	outputc.innerHTML = "The cost of energy "+grammar + city  +" is " + totalpowercostperkhw*100 + " ¢/kWH";
+
 
 	var outputwd = document.getElementById('wd');
 	outputwd.innerHTML = 'The wind direction is ' + wd + '°';
@@ -196,6 +224,8 @@ function calcs() {
 	lat = null;
 	lon = null;
 }
+
+
 
 function calcs2() {
 
