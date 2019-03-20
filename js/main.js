@@ -148,6 +148,7 @@ function calcs() {
 	var ws = weather.wind.speed;
 	var wd = weather.wind.deg;
 	var city;
+	var country = weather.sys.country;
 
 
 
@@ -155,13 +156,16 @@ function calcs() {
 		if (lat.toFixed(2) == (33.85)||lat.toFixed(3) == (33.845) && lon.toFixed(2) == (-84.41)) {
 			city = 'Pace Academy';
 			var grammar = 'at ';
+
 		} else {
 			city = weather.name;
 			var grammar = 'in ';
+
 		}
 	} else {
 		city = weather.name;
 		var grammar = 'in ';
+
 
 	}
 
@@ -204,7 +208,7 @@ function calcs() {
 	}) + ' watts';
 
 	var outputc = document.getElementById('c');
-	outputc.innerHTML = "The cost of energy "+grammar + city  +" is " + (((totalpowercostperkhw)*100).toFixed(2)) + " ¢/kWH";
+	outputc.innerHTML = "The cost of energy "+grammar + city+", "+ country +" is " + (((totalpowercostperkhw)*100).toFixed(2)) + " ¢/kWH";
 
 
 	var outputwd = document.getElementById('wd');
@@ -221,6 +225,7 @@ function calcs() {
 
 	var outputhidebutton = document.getElementById('hidebutton');
 	outputhidebutton.style.display = "inline";
+	console.log(country);
 	lat = null;
 	lon = null;
 }
