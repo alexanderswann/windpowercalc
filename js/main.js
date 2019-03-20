@@ -204,7 +204,7 @@ function calcs() {
 	}) + ' watts';
 
 	var outputc = document.getElementById('c');
-	outputc.innerHTML = "The cost of energy "+grammar + city  +" is " + (totalpowercostperkhw.toFixed(2))*100 + " ¢/kWH";
+	outputc.innerHTML = "The cost of energy "+grammar + city  +" is " + (((totalpowercostperkhw)*100).toFixed(2)) + " ¢/kWH";
 
 
 	var outputwd = document.getElementById('wd');
